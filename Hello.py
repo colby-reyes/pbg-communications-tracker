@@ -89,7 +89,7 @@ def view_filtered_spreadData(df, start_date, end_date):
             #     st.warning(f"**Issue:** {row['Denial Issue']}")
             #     st.success(f"**Summary:** {row['Summary']}")
     elif len(view_df) > 0 and view_as_sel == "Pivot":
-        piv = pd.pivot_table(view_df,index=['Name'],columns=['Date'],values=["Denial Issue","Summary"],aggfunc=lambda x:", ".join(x))
+        piv = pd.pivot_table(view_df,index=filter_by,columns=['Date'],values=["Denial Issue","Summary"],aggfunc=lambda x:", ".join(x))
         st.table(piv)
     else:
         st.warning("No data to display ... please adjust filters",icon="⚠️")
