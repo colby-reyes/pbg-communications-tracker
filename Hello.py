@@ -78,6 +78,7 @@ def view_filtered_spreadData(df, start_date, end_date):
     elif len(view_df) > 0 and view_as_sel == "List":
         for index,row in view_df.iterrows():
             msg = f"""##### {row["Department"]} ({row["Date"]})"""
+            attendees = f"Meeting Attendees: {row['Meeting Attendees']}"
             desc = f"Summary: {row['Summary']}"
             inf = msg + "\n\n" + f"Issue: {row['Denial Issue']}" + "\n\n" + f"Manager: {row['Name']}" + "\n\n" + desc
             st.info(inf)
