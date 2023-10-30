@@ -97,7 +97,6 @@ def view_filtered_spreadData(df, start_date, end_date):
 
 
 def view_trends(df, start_date, end_date):
-    import seaborn as sns
     column_list = ['Name','Department','Denial Issue','Clinic or Site']
     view_by = st.selectbox(label="Filter/Search By:",options=column_list)
     other_cols = [i for i in column_list if i != view_by]
