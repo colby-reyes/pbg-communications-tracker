@@ -80,7 +80,7 @@ def view_filtered_spreadData(df, start_date, end_date):
             msg = f"""##### {row["Department"]} ({row["Date"]})"""
             attendees = f"Meeting Attendees: {row['Meeting Attendees']}"
             desc = f"Summary: {row['Summary']}"
-            inf = msg + "\n\n" + f"Issue: {row['Denial Issue']}" + "\n\n" + f"Manager: {row['Name']}" + "\n\n" + desc
+            inf = msg + "\n\n" + f"Issue: {row['Denial Issue']}" + "\n\n" + f"Manager: {row['Name']}"+ "\n\n" + attendees + "\n\n" + desc
             st.info(inf)
             # with st.expander(msg, expanded=False):
             #     st.info(f"##### **Department:** {row['Department']}")
