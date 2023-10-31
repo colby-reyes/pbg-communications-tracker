@@ -160,7 +160,7 @@ def display_dashboard():
         max(df["Date"]),
         (min(df["Date"]), max(df["Date"])),
         label_visibility="visible",
-        format="M/d/YY"
+        format="M/D/YY",
     )
     # start_date = c2.date_input(
     #     "Start Date",
