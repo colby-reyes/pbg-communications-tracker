@@ -68,7 +68,7 @@ def view_filtered_spreadData(df, start_date, end_date):
                 "Date",
                 "Name",
                 "Department",
-                'Clinic or Site'
+                'Clinic or Site',
                 "Denial Issue",
                 "Meeting Attendees",
                 "Summary",
@@ -80,7 +80,7 @@ def view_filtered_spreadData(df, start_date, end_date):
             msg = f"""##### {row["Department"]} ({row["Date"]})"""
             attendees = f"**Meeting Attendees:** {row['Meeting Attendees']}"
             desc = f"**Summary:** {row['Summary']}"
-            inf = msg + "\n\n" + f"**Issue:** {row['Denial Issue']}" + "\n\n" + f"**Manager:** {row['Name']}"+ "\n\n" + attendees + "\n\n" + desc
+            inf = msg  + "\n\n" + f"**Manager:** {row['Name']}" + "\n\n" + f"**Issue:** {row['Denial Issue']}"+ "\n\n" + attendees + "\n\n" + desc
             st.info(inf)
             # with st.expander(msg, expanded=False):
             #     st.info(f"##### **Department:** {row['Department']}")
@@ -112,7 +112,10 @@ def view_trends(df, start_date, end_date):
     # chart_data["Count"] = chart_data[view_by].count()
     # st.dataframe(chart_data)
     st.header(f"Total Meetings by {view_by}")
-    st.bar_chart(chart_data,x=view_by,y="Count",use_container_width=True)
+    if len(view_df) > 0:
+        st.bar_chart(chart_data,x=view_by,y="Count",use_container_width=True)
+    else:
+        st.info("Not enough data to display \n\nPlease adjust filters or wait for additional data to be submitted.",icon="ℹ️")
 
     st.header(f"Trends in {view_by} Over Time")
     linePlt_data = view_df.groupby(["Date"],as_index=False).count()
@@ -128,7 +131,10 @@ def view_trends(df, start_date, end_date):
     new_plt_cols = plt_cols_mapper.values()
 
     # st.dataframe(new_df)
-    st.line_chart(new_df,x="Date",y=new_plt_cols)
+    if len(new_df) > 0:
+        st.line_chart(new_df,x="Date",y=new_plt_cols)
+    else:
+        st.info("Not enough data to display \n\nPlease adjust filters or wait for additional data to be submitted.",icon="ℹ️")
 
 
 
