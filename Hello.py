@@ -47,8 +47,8 @@ def display_sidebar():
 def view_filtered_spreadData(df, start_date, end_date):
     c1, c2 = st.columns(2)
     dept_list = set(df["Department"].to_list())
-    managers_list = set(df["Name"].to_list())
-    column_list = ['Name','Department','Denial Issue','Clinic or Site']
+    managers_list = set(df["Manager"].to_list())
+    column_list = ['Manager','Department','Denial Issue','Clinic or Site']
 
     filter_by = c1.selectbox(label="Filter/Search By:",options=column_list,key="spread_tab")
     filter_opts = set(df[filter_by].to_list())
@@ -66,7 +66,7 @@ def view_filtered_spreadData(df, start_date, end_date):
             use_container_width=True,
             column_order=[
                 "Date",
-                "Name",
+                "Manager",
                 "Department",
                 'Clinic or Site',
                 "Denial Issue",
@@ -80,11 +80,11 @@ def view_filtered_spreadData(df, start_date, end_date):
             msg = f"""##### {row["Department"]} ({row["Date"]})"""
             attendees = f"**Meeting Attendees:** {row['Meeting Attendees']}"
             desc = f"**Summary:** {row['Summary']}"
-            inf = msg  + "\n\n" + f"**Manager:** {row['Name']}" + "\n\n" + f"**Issue:** {row['Denial Issue']}"+ "\n\n" + attendees + "\n\n" + desc
+            inf = msg  + "\n\n" + f"**Manager:** {row['Manager']}" + "\n\n" + f"**Issue:** {row['Denial Issue']}"+ "\n\n" + attendees + "\n\n" + desc
             st.info(inf)
             # with st.expander(msg, expanded=False):
             #     st.info(f"##### **Department:** {row['Department']}")
-            #     st.info(f"###### **Manager:** {row['Name']}")
+            #     st.info(f"###### **Manager:** {row['Manager']}")
             #     #st.divider()
             #     st.warning(f"**Issue:** {row['Denial Issue']}")
             #     st.success(f"**Summary:** {row['Summary']}")
@@ -101,7 +101,7 @@ def view_filtered_spreadData(df, start_date, end_date):
 
 
 def view_trends(df, start_date, end_date):
-    column_list = ['Name','Department','Denial Issue','Clinic or Site']
+    column_list = ['Manager','Department','Denial Issue','Clinic or Site']
     view_by = st.selectbox(label="Filter/Search By:",options=column_list)
     other_cols = [i for i in column_list if i != view_by]
 
@@ -153,6 +153,7 @@ def display_dashboard():
             username=st.secrets["USERNAME"],
             password=st.secrets["PWD"],
         )
+        df.rename(columns={"Name":"Manager"})
 
     # set up data and filter options
     df["Date"] = pd.to_datetime(df["Date of Meeting or Outreach"]).dt.date
