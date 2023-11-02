@@ -153,7 +153,7 @@ def display_dashboard():
             username=st.secrets["USERNAME"],
             password=st.secrets["PWD"],
         )
-        df.rename(columns={"Name":"Manager"})
+        df.rename(columns={"Name":"Manager"},inplace=True)
 
     # set up data and filter options
     df["Date"] = pd.to_datetime(df["Date of Meeting or Outreach"]).dt.date
