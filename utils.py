@@ -16,7 +16,7 @@ class VersionInfo:
     contact = "colbyr@hs.uci.edu"
 
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def GetSharepointSpread(
     sheetname: str,
     url: str = st.secrets["URL"],
