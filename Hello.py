@@ -140,20 +140,25 @@ def view_trends(df, start_date, end_date):
 
 
 
-    
-
-
-
 # create organization of main dashboard to display
 def display_dashboard():
-    with st.spinner("Collecting Data ..."):
-        df = GetSharepointSpread(
-            "Form1",
-            url=st.secrets["URL"],
-            username=st.secrets["USERNAME"],
-            password=st.secrets["PWD"],
-        )
-        df.rename(columns={"Name":"Manager"},inplace=True)
+    @st.cache_data()
+    def load_data():
+        with st.spinner("Collecting Data ..."):
+            df = GetSharepointSpread(
+                "Form1",
+                url=st.secrets["URL"],
+                username=st.secrets["USERNAME"],
+                password=st.secrets["PWD"],
+            )
+            df.rename(columns={"Name":"Manager"},inplace=True)
+            return df
+    df = load_data()
+
+    def clear_cache_reload():
+        st.cache_data.clear()
+
+    st.button("Reload",help="If new data should be present but is not loaded here, please click to reload",on_click=clear_cache_reload)
 
     # set up data and filter options
     df["Date"] = pd.to_datetime(df["Date of Meeting or Outreach"]).dt.date
