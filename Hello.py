@@ -202,10 +202,8 @@ def run():
             # set up data and filter options
             df["Date"] = pd.to_datetime(df["Date of Meeting or Outreach"]).dt.date
             return df
-    try:
-        df = load_data()
-    except:
-        pass
+    
+    df = load_data()
 
     def clear_cache_reload():
         st.cache_data.clear()
