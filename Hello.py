@@ -229,6 +229,8 @@ def run():
         else:
             if len(df) > 0:
                 display_dashboard(df)
+            else:
+                st.info("Not enough data to display \n\nPlease wait for responses to be submitted.",icon="ℹ️")
 
 
 if __name__ == "__main__":
