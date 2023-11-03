@@ -5,7 +5,9 @@ import pandas as pd
 import time
 from utils import GetSharepointSpread, VersionInfo
 
+
 LOGGER = get_logger(__name__)
+
 ## SET PAGE GLOBALS
 
 if "login_accepted" not in st.session_state:
@@ -200,7 +202,10 @@ def run():
             # set up data and filter options
             df["Date"] = pd.to_datetime(df["Date of Meeting or Outreach"]).dt.date
             return df
-    df = load_data()
+    try:
+        df = load_data()
+    except:
+        pass
 
     def clear_cache_reload():
         st.cache_data.clear()

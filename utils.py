@@ -8,9 +8,10 @@ import pandas as pd
 from dataclasses import dataclass
 import streamlit as st
 
+
 @dataclass
 class VersionInfo:
-    version = "1.0.0"
+    version = "1.1.0"
     description = """`PBG Communications Tracker` version 1.0.0"""
     author = "Colby Reyes"
     contact = "colbyr@hs.uci.edu"
