@@ -142,7 +142,7 @@ def view_trends(df, start_date, end_date):
 
 # create organization of main dashboard to display
 def display_dashboard():
-    @st.cache_data()
+    @st.cache_data(show_spinner=False)
     def load_data():
         with st.spinner("Collecting Data ..."):
             df = GetSharepointSpread(
@@ -157,6 +157,8 @@ def display_dashboard():
 
     def clear_cache_reload():
         st.cache_data.clear()
+        df = load_data()
+        return df
 
     st.button("Reload",help="If new data should be present but is not loaded here, please click to reload",on_click=clear_cache_reload)
 
