@@ -227,7 +227,8 @@ def run():
                 type=btype
             )
         else:
-            display_dashboard(df)
+            if len(df) > 0:
+                display_dashboard(df)
 
 
 if __name__ == "__main__":
